@@ -17,3 +17,42 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.markdownHolder {
+  font-size: 16px;
+}
+
+.markdownHolder p {
+  @apply mb-[8px];
+}
+
+/* if p is inside li */
+.markdownHolder li p {
+  @apply mb-[0px];
+}
+
+.markdownHolder ol {
+  @apply list-inside list-decimal;
+}
+
+.markdownHolder ul {
+  @apply list-inside list-disc;
+}
+
+.markdownHolder h1 {
+  @apply text-xl font-bold mb-[8px];
+}
+
+.markdownHolder h2 {
+  @apply text-lg font-bold mb-[8px];
+}
+
+.markdownHolder h3 {
+  @apply text-base font-bold mb-[8px];
+}
+
+.markdownHolder h4,
+.markdownHolder h6,
+.markdownHolder h6 {
+  @apply text-base font-bold mb-[8px];
+}
