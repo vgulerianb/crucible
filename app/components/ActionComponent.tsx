@@ -1,11 +1,22 @@
 import { useState } from "react";
+import Loading from "../components/SvgComps/loading";
 
-export const ActionComponent = () => {
+export const ActionComponent = ({
+  setSessionId,
+}: {
+  setSessionId: (sessionId: string) => void;
+}) => {
   const [action, setAction] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   return (
     <div className="animate-fadeIn max-w-[600px] w-full bg-[#191724] rounded-md flex flex-col gap-[16px] p-[16px]">
-      <span className="text-sm cursor-pointer font-thin">{`<- Go Back`}</span>
+      <span
+        onClick={() => {
+          setSessionId("");
+        }}
+        className="text-sm cursor-pointer font-thin"
+      >{`<- Go Back`}</span>
       <span className="">What would you like to do with this video?</span>
       <div className="flex flex-col gap-[8px]">
         <button
@@ -48,7 +59,7 @@ export const ActionComponent = () => {
             type="button"
             className="w-full text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
           >
-            Generate
+            {!loading ? "Generate" : <Loading />}
           </button>
         </>
       ) : action ? (
