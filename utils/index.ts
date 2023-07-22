@@ -1,6 +1,10 @@
 import { decode, encode } from "gpt-tokenizer";
 
-const openAiHandler = async (query: string, variant: string) => {
+const openAiHandler = async (
+  query: string,
+  variant: string,
+  instructions?: string
+) => {
   let encoded = encode(query);
   query = "";
 
@@ -9,6 +13,14 @@ const openAiHandler = async (query: string, variant: string) => {
   }
   const decoded = await decode(encoded);
   const tweetExample = [
+    {
+      role: "user",
+      content: "Example",
+    },
+    {
+      role: "assistant",
+      content: "['Tweet1', 'Tweet2']",
+    },
     {
       role: "user",
       content: `A new PostgreSQL extension is now available in Supabase: pgvector, an open-source vector similarity search. The exponential progress of AI functionality over the past year has inspired many new real world applications. One specific challenge has been the ability to store and query embeddings at scale. In this post we'll explain what embeddings are, why we might want to use them, and how we can store and query them in PostgreSQL using pgvector.`,
@@ -33,20 +45,25 @@ const openAiHandler = async (query: string, variant: string) => {
           content:
             variant === "blog"
               ? `You are a highly efficient assistant specializing in converting user information into engaging, viral SEO-friendly detailed blog posts. Adhering to the key structure of a blog post - including Heading 1, Introduction, Body, and End notes - you weave compelling narratives without deviating from the facts provided in the input text. Please ensure responses are returned in markdown format.`
-              : `You are a highly efficient assistant that can turn user input into a concise, engaging viral tweet thread. While aiming to include all key information, keep the thread to a maximum of 5 tweets. Please formulate responses in a JSON array format, such as ["Tweet1", "Tweet2"].`,
+              : `You are a highly efficient assistant that can turn user input into a concise, engaging viral tweet thread. While aiming to include all key information, keep the thread to a maximum of 5 tweets. Please formulate responses in this format ["Tweet1", "Tweet2"].`,
         },
         ...(variant === "tweet" ? tweetExample : []),
         {
           role: "user",
-          content: `${decoded}`,
+          content: `${
+            instructions
+              ? `Instructions given by user: ${instructions}\n Content:\n`
+              : ""
+          }${decoded}`,
         },
       ],
-      max_tokens: 1700,
+      max_tokens: 1800,
       temperature: 0.4,
       stream: false,
     }),
   });
   const data = await response.json();
+
   return data?.choices?.[0]?.message?.content ?? null;
 };
 

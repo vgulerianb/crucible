@@ -12,7 +12,7 @@ export default function Home() {
         {!sessionId ? (
           <YoutubeVideoComponent setSessionId={setSessionId} />
         ) : (
-          <ActionComponent setSessionId={setSessionId} />
+          <ActionComponent sessionId={sessionId} setSessionId={setSessionId} />
         )}
       </div>
     </div>
