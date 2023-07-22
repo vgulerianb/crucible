@@ -1,4 +1,4 @@
-const openAiHandler = async (query: string, variant: "blog" | "tweet") => {
+const openAiHandler = async (query: string, variant: string) => {
   if (query.split(" ").length < 500) {
     return query;
   }
@@ -24,10 +24,12 @@ const openAiHandler = async (query: string, variant: "blog" | "tweet") => {
         },
       ],
       max_tokens: 1700,
-      temperature: 0.1,
+      temperature: 0.4,
       stream: false,
     }),
   });
   const data = await response.json();
   return data?.choices?.[0]?.message?.content ?? null;
 };
+
+export { openAiHandler };
