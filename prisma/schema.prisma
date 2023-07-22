@@ -1,11 +1,39 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("SQL_CONNECTION_STRING")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model conversations {
+  id         BigInt    @id @default(autoincrement())
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+  session_id String?
+  query      String?
+  response   String?
+  videos     videos?   @relation(fields: [session_id], references: [session_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model generations {
+  id         BigInt    @id @default(autoincrement())
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+  blog       String?
+  thread     Json?     @db.Json
+  session_id String?
+  videos     videos?   @relation(fields: [session_id], references: [session_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model videos {
+  id            BigInt          @id @default(autoincrement())
+  created_at    DateTime?       @default(now()) @db.Timestamptz(6)
+  url           String?
+  content       String?
+  session_id    String?         @unique
+  conversations conversations[]
+  generations   generations[]
 }
