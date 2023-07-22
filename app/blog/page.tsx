@@ -3,6 +3,7 @@ import { useState } from "react";
 import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
 import rehype from "rehype-raw";
+import { GithubButton } from "../components/GithubButton";
 
 export default function Tweet() {
   const [blog, setBlog] =
@@ -58,10 +59,24 @@ Thank you for taking the time to read this insightful blog. Your support can tru
     <div className="w-screen h-screen flex justify-center">
       <div className="w-full flex items-center flex-col max-w-[900px] gap-[16px]">
         <span className="text-sm cursor-pointer w-full">{`<- Go Back`}</span>
-        <h1 className="text-[28px] font-semibold text-center">
-          Generated Blog
-        </h1>
+        <div className="flex justify-between w-full">
+          <h1 className="text-[28px] font-semibold text-center">
+            Generated Blog
+          </h1>
+          <GithubButton />
+        </div>
+
         <div className="w-full cursor-pointer bg-[#191724] rounded-md shadow-lg p-[16px] flex flex-col gap-[16px] animate-fadeIn whitespace-break-spaces">
+          <button
+            type="button"
+            onClick={() => {
+              navigator.clipboard.writeText(blog);
+              alert("Copied to clipboard!");
+            }}
+            className="w-fit ml-auto border focus:ring-4 focus:outline-nonefont-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center focus:ring-gray-600 bg-gray-800 border-gray-700 text-white hover:bg-gray-700 mr-2 mb-2"
+          >
+            Copy Markdown
+          </button>
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehype]}

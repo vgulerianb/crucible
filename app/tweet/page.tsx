@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { GithubButton } from "../components/GithubButton";
 
 export default function Tweet() {
   const [tweets, setTweets] = useState<string[]>([
@@ -11,9 +12,13 @@ export default function Tweet() {
     <div className="w-screen h-screen flex justify-center">
       <div className="w-full flex items-center flex-col max-w-[900px] gap-[16px]">
         <span className="text-sm cursor-pointer w-full">{`<- Go Back`}</span>
-        <h1 className="text-[28px] font-semibold text-center">
-          Twitter Thread
-        </h1>
+
+        <div className="flex justify-between w-full">
+          <h1 className="text-[28px] font-semibold text-center">
+            Twitter Thread
+          </h1>
+          <GithubButton />
+        </div>
 
         {tweets?.map((tweet, key) => (
           <Link
