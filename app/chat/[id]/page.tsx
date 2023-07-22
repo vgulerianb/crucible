@@ -1,10 +1,9 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
-import { GithubButton } from "../components/GithubButton";
-import BotSvg from "../components/SvgComps/BotSvg";
-import EnterSvg from "../components/SvgComps/EnterSvg";
-import LoadingSvg from "../components/SvgComps/loading";
+import { GithubButton } from "../../components/GithubButton";
+import BotSvg from "../../components/SvgComps/BotSvg";
+import EnterSvg from "../../components/SvgComps/EnterSvg";
+import LoadingSvg from "../../components/SvgComps/loading";
 import ReactMarkdown from "react-markdown";
 
 interface ChatInterface {
