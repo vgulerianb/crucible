@@ -1,6 +1,16 @@
 export const GithubButton = () => {
   return (
     <button
+      onClick={() => {
+        const git = "https://github.com/vgulerianb/crucible";
+        const a = document.createElement("a");
+        a.setAttribute("href", git);
+        a.setAttribute("target", "_blank");
+        a.setAttribute("hidden", "true");
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }}
       className="text-white bg-[#24292F] focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center focus:ring-gray-500  mr-2 mb-2"
       type="button"
     >

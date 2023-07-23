@@ -21,12 +21,11 @@ export async function POST(req: Request) {
   if (!prompt || !sessionId) {
     return new Response("Invalid session");
   }
-  if (previous && previous?.length > 3) {
-    previous.splice(0, previous.length - 3);
+  if (previous && previous?.length > 4) {
+    previous.splice(0, previous.length - 4);
   }
   const videoContent = await supabaseClient.from("videos").select("content");
 
-  console.log({ videoContent: videoContent?.data?.[0]?.content });
   try {
     const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo-16k",
@@ -40,6 +39,12 @@ export async function POST(req: Request) {
             ${videoContent?.data?.[0]?.content}
           `,
         },
+        ...(previous?.length
+          ? previous?.map((prev: any) => ({
+              role: prev.isSender ? "user" : "system",
+              content: prev.msg,
+            }))
+          : []),
         {
           role: "user",
           content: prompt,
@@ -48,11 +53,11 @@ export async function POST(req: Request) {
     });
     const stream = OpenAIStream(response, {
       onCompletion: async (completion: string) => {
-        // await supabaseClient.from("conversations").insert({
-        //   query: prompt,
-        //   response: completion,
-        //   session_id: sessionId,
-        // });
+        await supabaseClient.from("conversations").insert({
+          query: prompt,
+          response: completion,
+          session_id: sessionId,
+        });
       },
     });
     console.log({ stream: "" });

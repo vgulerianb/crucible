@@ -1,17 +1,18 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GithubButton } from "../../components/GithubButton";
 import BotSvg from "../../components/SvgComps/BotSvg";
 import EnterSvg from "../../components/SvgComps/EnterSvg";
 import LoadingSvg from "../../components/SvgComps/loading";
 import ReactMarkdown from "react-markdown";
+import axios from "axios";
 
 interface ChatInterface {
   msg: string;
   isSender: boolean;
 }
 
-export default function Tweet() {
+export default function Chat(params: any) {
   const variant = "dark";
   const [answer, setAnswer] = useState<string>("");
   const [search, setSearch] = useState<string>("");
@@ -23,18 +24,72 @@ export default function Tweet() {
     },
   ]);
 
-  const handleSearch = () => {
-    setLoading(true);
+  const scrollToBottom = () => {
+    const chatsHolder = document.querySelector(".chatsHolder");
+    if (chatsHolder) {
+      chatsHolder.scrollTop = chatsHolder.scrollHeight;
+    }
   };
+
+  const handleSearch = async () => {
+    if (loading) return;
+    const searchValue = search.trim();
+    setSearch("");
+    setChats((prev) => [
+      ...prev,
+      {
+        msg: search,
+        isSender: true,
+      },
+      {
+        msg: "",
+        isSender: false,
+      },
+    ]);
+    setLoading(true);
+    console.log({ params });
+    await axios
+      .post(
+        "/api/chat",
+        {
+          sessionId: params?.params?.id,
+          prompt: searchValue,
+          previous: chats.slice(1, chats.length),
+        },
+        {
+          onDownloadProgress: (progressEvent: any) => {
+            if (progressEvent?.event?.target?.response)
+              setAnswer(progressEvent?.event?.target?.response);
+          },
+        }
+      )
+      .then((response) => {
+        setAnswer(response?.data);
+      })
+      .catch(() => {
+        setAnswer("Something went wrong, please try again later.");
+      });
+    setLoading(false);
+    setTimeout(() => {
+      setAnswer("");
+    });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+    if (answer !== "") {
+      let tempChats = [...chats];
+      tempChats[tempChats.length - 1].msg = answer;
+      setChats(tempChats);
+    }
+  }, [answer, loading]);
 
   return (
     <div className="w-screen h-screen flex justify-center">
       <div className="w-full flex items-center flex-col max-w-[900px] gap-[16px]">
-        <span className="text-sm cursor-pointer w-full">{`<- Go Back`}</span>
-
         <div className="flex justify-between w-full">
           <h1 className="text-[28px] font-semibold text-center">
-            Twitter Thread
+            Chat with the youtube bot
           </h1>
           <GithubButton />
         </div>

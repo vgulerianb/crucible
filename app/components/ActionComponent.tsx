@@ -40,6 +40,16 @@ export const ActionComponent = ({
       });
   };
 
+  const startChat = () => {
+    const a = document.createElement("a");
+    a.setAttribute("href", `${window.location.href}/chat/${sessionId}`);
+    a.setAttribute("target", "_blank");
+    a.setAttribute("hidden", "true");
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
   return (
     <div className="animate-fadeIn max-w-[600px] w-full bg-[#191724] rounded-md flex flex-col gap-[16px] p-[16px]">
       <span
@@ -101,6 +111,7 @@ export const ActionComponent = ({
         </>
       ) : action ? (
         <button
+          onClick={startChat}
           type="button"
           className="w-full text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
         >

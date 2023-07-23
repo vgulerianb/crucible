@@ -56,3 +56,51 @@ body {
 .markdownHolder h6 {
   @apply text-base font-bold mb-[8px];
 }
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+pre {
+  margin: 0.5em 0;
+  overflow: auto;
+  border-radius: 0.3em;
+  color: #fff;
+  font-size: 13px !important;
+}
+
+:not(pre) > code {
+  background-color: #222a39 !important;
+  color: #fff !important;
+  padding: 2px !important;
+  border-radius: 2px !important;
+}
+.markdownHolder {
+  font-size: 16px !important;
+  padding-top: 4px !important;
+}
+.markdownHolder p {
+  margin: 0px;
+}
+@media (min-width: 768px) {
+  .inset-0 {
+    inset: 0px !important;
+  }
+}
+ul {
+  padding: 0px;
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+ol {
+  padding: 0px;
+  list-style: decimal;
+  list-style-position: inside;
+}
+blockquote {
+  margin: 0px;
+  padding: 4px 0px;
+  font-size: 12px;
+  font-weight: 500;
+}
