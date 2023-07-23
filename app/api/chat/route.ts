@@ -24,7 +24,10 @@ export async function POST(req: Request) {
   if (previous && previous?.length > 4) {
     previous.splice(0, previous.length - 4);
   }
-  const videoContent = await supabaseClient.from("videos").select("content");
+  const videoContent = await supabaseClient
+    .from("videos")
+    .select("content")
+    .eq("session_id", sessionId);
 
   try {
     const response = await openai.createChatCompletion({
