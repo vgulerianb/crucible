@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../../../prisma/db";
 import { getSubtitles } from "youtube-captions-scraper";
+import { initDb } from "../../../utils/initDb";
 
 const uuid = require("uuid");
 
@@ -24,13 +25,23 @@ export async function POST(req: Request) {
     });
   content = content.map((c: any) => c.text).join(" ");
 
-  const videoStatus = await prisma.videos.create({
-    data: {
-      url: request.url,
-      session_id: sessionId,
-      content,
-    },
+  const videoStatus = await prisma.videos
+    .create({
+      data: {
+        url: request.url,
+        session_id: sessionId,
+        content,
+      },
+    })
+    .catch(async (err) => {
+      console.log(err);
+      if (err.code === "P2021") {
+        await initDb();
+      }
+    });
+  console.log({ videoStatus });
+  if (videoStatus) return NextResponse.json({ sessionId });
+  return new Response("Something went wrong", {
+    status: 400,
   });
-  console.log(videoStatus);
-  return NextResponse.json({ sessionId });
 }
