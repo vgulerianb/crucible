@@ -1,34 +1,21 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Crucible | Copilot for YouTube
 
-## Getting Started
+Crucible is an amazing tool that serves as a copilot for YouTube. It is designed to enhance your YouTube experience by providing a range of services like generating blogs, creating Twitter threads from YouTube videos, and even enabling users to chat with YouTube videos.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- **Blog Generation:** Crucible can convert your favorite YouTube videos into readable blogs. Whether it's educational content, discussion panels, interviews, or any other genre, Crucible transforms video content into written format so you can revisit the content at your own pace.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Twitter Thread Creation:** Are you keen on sharing insights from a video you just watched on YouTube? Crucible can help you create a Twitter thread from a YouTube video. This unique feature allows you to share valuable content with your Twitter following without the hassle of transcribing and summarizing the content.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Chat with YouTube Videos:** One of the most innovative features of Crucible is its ability to enable users to chat with YouTube videos. This feature creates an interactive experience, making YouTube consumption more engaging and enjoyable.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Contributions
 
-## Learn More
+We appreciate contributions from the community. If you are interested in contributing, please feel free to make a pull request.
 
-To learn more about Next.js, take a look at the following resources:
+## Contact Us
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Have any questions or feedback? We’d love to hear from you. Contact us at support@docnavigator.in.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+_Please note that Crucible is not endorsed by YouTube, Google, or Twitter. These are trademarks of their respective companies._

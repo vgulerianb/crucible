@@ -196,14 +196,11 @@ export default function Chat(params: any) {
                         overflow: "hidden",
                       }}
                     >
-                      <ReactMarkdown
-                        className={`markdownHolder`}
-                        children={
-                          answer !== "" && index === chats.length - 1
-                            ? answer
-                            : chat?.msg
-                        }
-                      />
+                      <ReactMarkdown className={`markdownHolder`}>
+                        {answer !== "" && index === chats.length - 1
+                          ? answer
+                          : chat?.msg}
+                      </ReactMarkdown>
                     </div>
                   ) : (
                     ""

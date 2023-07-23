@@ -1,3 +1,4 @@
+"use client";
 export const GithubButton = () => {
   return (
     <button
