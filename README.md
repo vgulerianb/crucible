@@ -1,7 +1,7 @@
 # Crucible | Copilot for YouTube
 
 Crucible is an amazing tool that serves as a copilot for YouTube. It is designed to enhance your YouTube experience by providing a range of services like generating blogs, creating Twitter threads from YouTube videos, and even enabling users to chat with YouTube videos.
-![ezgif-2-ee894b92b5](https://github.com/vgulerianb/crucible/assets/90599235/65c5e273-a315-4b90-844d-96ed6061834e)
+![ezgif-2-ee894b92b5](https://github.com/vgulerianb/crucible/assets/90599235/356cc38a-2f4f-419e-9c07-89a045fe1a16)
 
 ## Features
 
