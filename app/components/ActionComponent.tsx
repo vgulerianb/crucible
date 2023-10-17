@@ -25,7 +25,7 @@ export const ActionComponent = ({
         const a = document.createElement("a");
         a.setAttribute(
           "href",
-          `${window.location.href}/${variant}/${sessionId}`
+          `${window.location.origin}/${variant}/${sessionId}`
         );
         a.setAttribute("target", "_blank");
         a.setAttribute("hidden", "true");
@@ -43,7 +43,7 @@ export const ActionComponent = ({
 
   const startChat = () => {
     const a = document.createElement("a");
-    a.setAttribute("href", `${window.location.href}/chat/${sessionId}`);
+    a.setAttribute("href", `${window.location.origin}/chat/${sessionId}`);
     a.setAttribute("target", "_blank");
     a.setAttribute("hidden", "true");
     document.body.appendChild(a);
